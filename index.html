@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Menu Card</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <!-- We import arjs version without NFT but with marker + location based support -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>   
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <!-- SweetAlert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgrv68cxFTLobl62Z1f_lyQzxJpY-xAFY",
+      authDomain: "c-170-menu-card.firebaseapp.com",
+      projectId: "c-170-menu-card",
+      storageBucket: "c-170-menu-card.appspot.com",
+      messagingSenderId: "962972629043",
+      appId: "1:962972629043:web:a3066b4bafa185cf728b46"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Local StyleSheet -->
+  <link href="./style.css" rel="stylesheet" />
+  <script src="./js/markerHandler.js"></script>
+  <script src="./js/addMarkers.js"></script>
+  <script src="./js/addButtons.js"></script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+  <a-scene id="main-scene" vr-mode-ui="enabled: false" embedded
+    arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;debugUIEnabled: false;"
+    gesture-detector create-markers create-buttons>
+    <!-- Camera -->
+    <a-entity camera></a-entity>
+  </a-scene>
+  <div id="button-div" class="fixed-bottom"></div>
+
+  <!-- Order Summary Boilerplate -->
+  <div class="container">
+    <div id="modal-div" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Order Summary</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <td><strong>Item</strong></td>
+                    <td class="text-center"><strong>Price</strong></td>
+                    <td class="text-center"><strong>Quantity</strong></td>
+                    <td class="text-right"><strong>Total</strong></td>
+                  </tr>
+                </thead>
+                <tbody id="bill-table-body">
+                  <!-- foreach ($order->lineItems as $line)  -->
+                    
+                  <!-- Your Order Summary UI will comes here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="pay-button" type="button" class="btn btn-primary">
+              Pay Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function closeModal() {
+      document.getElementById("modal-div").style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
